@@ -10,7 +10,34 @@
 
 </div>
 <script type="text/ng-template" id="todoPage.html">
-  欢迎{{name}}
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">全选
+                            </label>
+                        </div>
+                    </td>
+                    <td>事项名称</td>
+                </tr>
+                <tr ng-repeat="todo in todos track by $index">
+                    <td>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <label >{{todo.title}}</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </script>
 <script src="lib/jquery/dist/jquery.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -19,5 +46,6 @@
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="app.js"></script>
 <script src="controllers/todoCtrl.js"></script>
+<script src="services/todoService.js"></script>
 </body>
 </html>
