@@ -14,6 +14,15 @@ angular.module('todoApp').factory('todoService',function($resource){
     return {
         query:function(){
             return resource.query().$promise;
+        },
+        save:function(todo){
+            return resource.save(todo).$promise;
+        },
+        delete:function(todo){
+            return resource.delete(todo).$promise;// /todos/1   /todos
+        },
+        update:function(todo){
+            return resource.update({id:todo.id},todo).$promise;
         }
     }
 });

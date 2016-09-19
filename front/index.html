@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>待办事项</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .completed{
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body>
 <div class="container" ng-view>
@@ -14,25 +19,59 @@
         <div class="col-xs-12">
             <table class="table table-bordered">
                 <tr>
+                    <td colspan="3">
+                        <form ng-submit="createTodo()">
+                            <input type="text" class="form-control" ng-model="newTodo">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox">全选
+                                <input ng-model="all" ng-click="checkAll(all)" type="checkbox">全选
                             </label>
                         </div>
                     </td>
                     <td>事项名称</td>
+                    <td>
+                        操作
+                    </td>
                 </tr>
-                <tr ng-repeat="todo in todos track by $index">
+                <tr ng-repeat="todo in todos  | filter:statusFilter track by $index">
                     <td>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox">
+                                <input ng-model="todo.completed" ng-change="toggle(todo)" type="checkbox">
                             </label>
                         </div>
                     </td>
+                    <td >
+                        <label ng-show="todo != editTodo" ng-dblclick="edit(todo)"  ng-class="{completed:todo.completed}">{{todo.title}}</label>
+                        <div ng-show="todo == editTodo">
+                            <input class="form-control" ng-blur="save(todo)" type="text" ng-model="todo.title">
+                        </div>
+
+                    </td>
                     <td>
-                        <label >{{todo.title}}</label>
+                        <button ng-click="delete(todo)" class="btn btn-danger">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       还有{{remindingCount}}件事未完成
+                    </td>
+                    <td>
+                        <nav>
+                            <ul class="pagination">
+                                <li ng-class="{active:status==''}"><a href="#/">全部</a></li>
+                                <li ng-class="{active:status=='active'}"><a href="#/active">未完成</a></li>
+                                <li ng-class="{active:status=='completed'}"><a href="#/completed">已完成</a></li>
+                            </ul>
+                        </nav>
+                    </td>
+                    <td>
+                        <button ng-show="completedCount" ng-click="clear()" class="btn btn-danger">清空已完成</button>
                     </td>
                 </tr>
             </table>
