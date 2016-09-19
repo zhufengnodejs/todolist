@@ -6,7 +6,7 @@ angular.module('todoApp').factory('todoService',function($resource){
      * remove 删除资源
      * delete  删除资源
      */
-    var resource = $resource('http://localhost:9090/todos/:id',null,{
+    var resource = $resource('http://localhost:9090/todos/:_id',null,{
        update:{
            method:'PUT'
        }
@@ -22,7 +22,7 @@ angular.module('todoApp').factory('todoService',function($resource){
             return resource.delete(todo).$promise;// /todos/1   /todos
         },
         update:function(todo){
-            return resource.update({id:todo.id},todo).$promise;
+            return resource.update({_id:todo._id},todo).$promise;
         }
     }
 });

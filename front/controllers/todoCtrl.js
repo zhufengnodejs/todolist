@@ -21,7 +21,7 @@ angular.module('todoApp').controller('todoCtrl',function($scope,todoService,$fil
     $scope.delete = function(todo){
         todoService.delete(todo).then(function(){
             $scope.todos = $scope.todos.filter(function(item){
-                return item.id != todo.id;
+                return item._id != todo._id;
             });
         });
     }
