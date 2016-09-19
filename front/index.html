@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>待办事项</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container" ng-view>
+
+</div>
+<script type="text/ng-template" id="todoPage.html">
+  欢迎{{name}}
+</script>
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-route/angular-route.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="app.js"></script>
+<script src="controllers/todoCtrl.js"></script>
+</body>
+</html>
